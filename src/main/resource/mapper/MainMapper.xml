@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.mapper.MainMapper">
+    <select id="findAllByConditon" resultType="cn.entity.Main">
+        select a.* , d.name from air_quality_index a, district d where a.district_id = d.id
+         <if test="id!=null and id!='' ">
+            and district_id  = #{id}
+         </if>
+        limit #{p.startRow},#{p.pageSize}
+    </select>
+
+    <select id="findCount" resultType="int">
+        select count(1)from air_quality_index where 1=1
+        <if test="id!=null and id!='' ">
+            and district_id  = #{id}
+        </if>
+    </select>
+</mapper>
